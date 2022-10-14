@@ -1,0 +1,1 @@
+gunicorn -w 4 -k uvicorn.workers.Uvicorn project_camille.app:app
