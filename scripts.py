@@ -9,7 +9,7 @@ def make_db():
     cur = con.cursor()
 
     cur.execute("CREATE TABLE users(username, password)")
-    cur.execute("INSERT INTO users VALUES ('vilain', 'qwerty')")
+    cur.execute("INSERT INTO users VALUES ('vilain', 'qdsjflkqsdjfkl')")
 
     con.commit()
     result = cur.execute("SELECT * FROM users")
