@@ -29,14 +29,13 @@ jobs:
         run: poetry install
       
       - name: Build package
-        run: poetry build --format wheel
+        run: poetry export -f requirements.txt --output requirements.txt
       
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
           name: python-app
-          path: |
-            dist/
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
