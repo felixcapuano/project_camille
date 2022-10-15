@@ -19,7 +19,7 @@ app = FastAPI(openapi_url=None, redoc_url=None, docs_url=None)
 security = HTTPBasic()
 
 async def basic_auth(credentials: HTTPBasicCredentials = Depends(security)):
-    if credentials.password != "qwerty" and credentials.username != "vilain":
+    if credentials.password != "123456" or credentials.username != "vilain":
         raise HTTPException(status_code=401, detail="Tu as échoué pour réessayer, tu peux rafraichire la page.")
 
 @app.get("/", response_class=HTMLResponse, dependencies=[Depends(basic_auth)])
