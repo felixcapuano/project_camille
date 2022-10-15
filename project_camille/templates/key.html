@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secret key</title>
+</head>
+<body>
+  <a href="/">Home</a>
+  <pre hidden><code>
+-- Algorithme de la clé très secrète emmenant vers mon repère secret --
+
+DEBUT
+    cle = 0
+    POUR compteur DE 1 JUSQU'À 11 AVEC UN PAS DE 1
+        SI compteur EST ÉGALE À 3
+            clé = clé * compteur
+        SINON SI compteur EST ÉGALE À 7
+            clé = clé - 1
+        SINON
+            clé = clé + 2
+    FIN POUR
+FIN
+
+--
+  </code></pre>
+</body>
+</html>

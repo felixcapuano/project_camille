@@ -19,7 +19,7 @@ app = FastAPI(openapi_url=None, redoc_url=None, docs_url=None)
 security = HTTPBasic()
 
 async def basic_auth(credentials: HTTPBasicCredentials = Depends(security)):
-    if credentials.password != "123456" or credentials.username != "vilain":
+    if credentials.password != "sunshine" or credentials.username != "vilain":
         raise HTTPException(status_code=401, detail="Tu as échoué pour réessayer, tu peux rafraichire la page.")
 
 @app.get("/", response_class=HTMLResponse, dependencies=[Depends(basic_auth)])
@@ -29,6 +29,10 @@ async def root(request: Request, logged: bool = Cookie(default=False, alias="Log
 @app.get("/login", response_class=HTMLResponse)
 async def login(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
+
+@app.get("/secret-key", response_class=HTMLResponse)
+async def key(request: Request):
+    return templates.TemplateResponse("key.html", {"request": request})
 
 @app.get("/form", response_class=RedirectResponse, dependencies=[Depends(basic_auth)])
 async def login(username: str = Query(default=""), password: str = Query(default="")):

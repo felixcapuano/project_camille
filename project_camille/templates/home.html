@@ -7,25 +7,12 @@
   <title>Home</title>
 </head>
 <body>
-  Home page
+  Page d'Accueil
 
   {% if logged %}
-    <a href="/logout">déconnexion</a>
+    <a href="/logout">Déconnexion</a>
     <p>Bienvenue super vilain. Fait comme chez toi. eheh</p>
-    <pre hidden><code>
-# algorithme de la clé très secrète
-DEBUT
-    cle = 0
-    POUR compteur DE 1 JUSQU'À 11 AVEC UN PAS DE 1
-        SI compteur EST ÉGALE À 3
-            clé = clé * compteur
-        SINON SI compteur EST ÉGALE À 7
-            clé = clé - 1
-        SINON
-            clé = clé + 2
-    FIN POUR
-FIN
-    </code></pre>
+    <a href="/secret-key">Clé secrète</a>
   {% else %}
     <a href="/login">connexion</a>
     <p>Ahahah ! Tu pensais que je n'avais pas pensé à tout! J'ai mis un second mots de passe de sécurité.</p>
