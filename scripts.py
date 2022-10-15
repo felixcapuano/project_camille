@@ -1,9 +1,11 @@
 import uvicorn
 import sqlite3
 
+
 def dev():
     uvicorn.run("project_camille.main:app", reload=True)
-    
+
+
 def make_db():
     con = sqlite3.connect("project_camille/main.db")
     cur = con.cursor()
