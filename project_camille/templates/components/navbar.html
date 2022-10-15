@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Repère secret</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          {% if logged %}
+            <a class="nav-link" href="/logout">Deconnexion</a>
+          {% else %}
+            <a class="nav-link" href="/login">Connexion</a>
+          {% endif %}
+        </li>
+      </ul>
+  </div>
+</nav>

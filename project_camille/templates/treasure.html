@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Success</title>
-</head>
-<body>
-  <a href="/">Accueil</a>
-  {% if success %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Success</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    {% include 'components/navbar.html' %}
+    {% if success %}
     <p>Bien joué à moi !!!</p>
-    <p>Note à moi même : Attache toujours la clé des plans secrets à ta ceinture dans ton dos. Et si les moldus, je vous prend à essayer de voler mes plans, alors enferme les, pour qu'il ne puisse jamais les touver jusqu'à ce que tu les mettes à execution.</p>
-  {% else %}
+    <p>
+      Note à moi même : Attache toujours la clé des plans secrets à ta ceinture
+      dans ton dos. Et si les moldus, je vous prend à essayer de voler mes
+      plans, alors enferme les, pour qu'il ne puisse jamais les touver jusqu'à
+      ce que tu les mettes à execution.
+    </p>
+    {% else %}
     <p>Tu as lammentablement échoué. AHah</p>
-  {% endif %}
-</body>
+    {% endif %}
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

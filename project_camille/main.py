@@ -18,24 +18,38 @@ app = FastAPI(openapi_url=None, redoc_url=None, docs_url=None)
 
 security = HTTPBasic()
 
-async def basic_auth(credentials: HTTPBasicCredentials = Depends(security)):
+class RequiresLoginException(Exception):
+    pass
+
+@app.exception_handler(RequiresLoginException)
+async def exception_handler(request: Request, exc: RequiresLoginException) -> Response:
+    return RedirectResponse(url='/login')
+
+async def basic_auth(
+    credentials: HTTPBasicCredentials = Depends(security),
+    logged: bool = Cookie(default=False, alias="Logged"),
+    ):
     if credentials.password != "sunshine" or credentials.username != "vilain":
         raise HTTPException(status_code=401, detail="Tu as échoué pour réessayer, tu peux rafraichire la page.")
 
-@app.get("/", response_class=HTMLResponse, dependencies=[Depends(basic_auth)])
-async def root(request: Request, logged: bool = Cookie(default=False, alias="Logged")):
+    return logged
+
+@app.get("/", response_class=HTMLResponse)
+async def root(request: Request, logged: bool = Depends(basic_auth)):
     return templates.TemplateResponse("home.html", {"request": request, "logged": logged})
 
 @app.get("/login", response_class=HTMLResponse)
-async def login(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
+async def login(request: Request, logged: bool = Depends(basic_auth)):
+    return templates.TemplateResponse("login.html", {"request": request, "logged": logged})
 
 @app.get("/secret-key", response_class=HTMLResponse)
-async def key(request: Request):
+async def key(request: Request, logged: bool = Depends(basic_auth)):
+    if not logged:
+        raise RequiresLoginException()
     return templates.TemplateResponse("key.html", {"request": request})
 
-@app.get("/form", response_class=RedirectResponse, dependencies=[Depends(basic_auth)])
-async def login(username: str = Query(default=""), password: str = Query(default="")):
+@app.get("/form", response_class=RedirectResponse)
+async def login(username: str = Query(default=""), password: str = Query(default=""), logged: bool = Depends(basic_auth)):
 
     # > ' OR '1'='1
     select = cursor.execute(f"SELECT username, password FROM users WHERE username='{username}' AND password='{password}'")
@@ -52,9 +66,11 @@ async def logout():
     headers = {"Set-Cookie": f"Logged={False}; HttpOnly"}
     return RedirectResponse(url="/", headers=headers)
 
-@app.get("/{code}", response_class=HTMLResponse, dependencies=[Depends(basic_auth)])
-async def easter_egg(request: Request, code: str):
+@app.get("/{code}", response_class=HTMLResponse)
+async def easter_egg(request: Request, code: str, logged: bool = Depends(basic_auth)):
+    if not logged:
+        raise RequiresLoginException()
     success = False
     if code == "25":
         success = True
-    return templates.TemplateResponse("treasure.html", {"request": request, "success": success})
+    return templates.TemplateResponse("treasure.html", {"request": request, "success": success, "logged": logged})
