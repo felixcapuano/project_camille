@@ -2,16 +2,25 @@
 
 {% if logged %}
 
-<a href="/logout">Déconnexion</a>
-<p>Bienvenue super vilain. Fait comme chez toi. eheh</p>
-<a href="/secret-key">Clé secrète</a>
+<div class="text-center">
+  <p class="fw-bold fs-2">Bienvenu super-vilain. Fais comme chez toi! eheh</p>
+  <a href="/secret-key"><button type="button" class="btn btn-primary" style="margin: 0px 0px 20px 0px">Clé secrète</button></a>
+</div>
+<div class="text-center">
+  <img src="{{ url_for("static", path="/cosy.jpg") }}" class="img-fluid" style="height: 67vh;">
+</div>
 
 {% else %}
 
-<p>
+<div class="text-center">
+<p class="fw-bold fs-2">
   Ahahah ! Tu pensais que je n'avais pas pensé à tout! J'ai mis un second mots
   de passe de sécurité.
 </p>
+</div>
+<div class="text-center">
+<img src="{{ url_for("static", path="/bouncer.jpg") }}" class="img-fluid" style="height: 67vh;">
+</div>
 
 {% endif %}
 
