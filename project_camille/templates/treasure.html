@@ -1,15 +1,33 @@
 {% include 'components/header.html' %}
 
 {% if success %}
-<p>Bien joué à moi !!!</p>
-<p>
-  Note à moi même : Attache toujours la clé des plans secrets à ta ceinture dans
-  ton dos. Et si les moldus, je vous prend à essayer de voler mes plans, alors
-  enferme les, pour qu'il ne puisse jamais les touver jusqu'à ce que tu les
-  mettes à execution.
-</p>
+
+<div class="bg-image position-relative" style="background-image: url(/static/treasure-success.jpg);background-position: center bottom; height: 93vh; background-size: cover;">
+<p class="text-center fw-bold fs-2">Bien joué à moi !!!</p>
+<div class="card text-bg-danger mb-3 container" style="max-width: 25rem;">
+  <div class="card-body">
+    <h5 class="card-title">Note à moi même</h5>
+    <p class="card-text">
+      - On dit pain au chocolat pas chocolatine<br/>
+      - Déguise toi en basketteur pour la fête<br/>
+      - Tu dois attacher ta clé sur ceinture<br/>
+    </p>
+  </div>
+</div>
+
+  <div class="container-fluid text-center">
+    <img style="height: 67vh;" src="{{ url_for("static", path="007.png") }}">
+  </div>
+</div>
+
 {% else %}
-<p>Tu as lammentablement échoué. AHah</p>
+<div class="bg-image position-relative" style="background-image: url(/static/treasure-fail.jpg);background-position: center bottom; height: 93vh; background-size: cover;">
+  <p class="text-center fw-bold fs-2">Tu as lammentablement échoué. ahah!</p>
+
+  <div class="container-fluid" style="height: 96%;" >
+    <img class="img-fluid" style="height: 100%" src="https://media.tenor.com/p_l2C1SX4bEAAAAi/confused-john.gif"/>
+  </div>
+</div>
 {% endif %}
 
 {% include 'components/footer.html' %}
